@@ -29,41 +29,25 @@ const SetData = (props) => {
 
     // function to change background depending on weather conditions
     function changeBackground(condition) {
-        let bg;
-        if (condition === "partly-cloudy-day") {
-            bg = "https://i.ibb.co/qNv7NxZ/pc.webp";
-        } else if (condition === "partly-cloudy-night") {
-            bg = "https://i.ibb.co/RDfPqXz/pcn.jpg";
-        } else if (condition === "rain") {
-            bg = "https://i.ibb.co/h2p6Yhd/rain.webp";
-        } else if (condition === "clear-day") {
-            bg = "https://i.ibb.co/WGry01m/cd.jpg";
-        } else if (condition === "clear-night") {
-            bg = "https://i.ibb.co/kqtZ1Gx/cn.jpg";
-        } else {
-            bg = "https://i.ibb.co/qNv7NxZ/pc.webp";
-        }
+        let bg = new Date().getHours() > 18 ? "https://i.ibb.co/kqtZ1Gx/cn.jpg" : "https://i.ibb.co/qNv7NxZ/pc.webp";
+        console.log(condition)
         document.body.style.backgroundImage = `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${bg})`;
     }
 
     // function to change weather icons
     function getIcon(condition) {
         const weatherIconMappings = {
-            "clear sky": "https://i.ibb.co/rb4rrJL/26.png",
-            "few clouds": "https://i.ibb.co/PZQXH8V/27.png",
-            "scattered clouds": "https://i.ibb.co/PZQXH8V/27.png",
+            "clear sky": "https://i.ibb.co/WGry01m/cd.jpg",
+            "scattered clouds": "https://i.ibb.co/kqtZ1Gx/cn.jpg",
             "broken clouds": "https://i.ibb.co/PZQXH8V/27.png",
             "shower rain": "https://i.ibb.co/kBd2NTS/39.png",
-            "rain": "https://i.ibb.co/kBd2NTS/39.png",
-            "thunderstorm": "https://i.ibb.co/kBd2NTS/39.png",
-            "snow": "https://i.ibb.co/f954r0k/46.png",
-            "mist": "https://i.ibb.co/728544g/50.png",
-            "fog": "https://i.ibb.co/54N542B/47.png",
+            "rain": "https://i.ibb.co/h2p6Yhd/rain.webp",
+            "mist": "https://i.ibb.co/qNv7NxZ/pc.webp",
             // Add more mappings as needed based on OpenWeatherMap's descriptions
         };
         const matchingIcon = weatherIconMappings[condition.toLowerCase()]; // Case-insensitive matching
 
-        return matchingIcon || "https://i.ibb.co/rb4rrJL/26.png";
+        return matchingIcon || new Date().getHours() > 18 ? "https://i.ibb.co/1nxNGHL/10.png" : "https://i.ibb.co/rb4rrJL/26.png";
     }
 
     //get hours from hh:mm:ss
