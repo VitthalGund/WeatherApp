@@ -28,7 +28,8 @@ function App() {
       }
 
       setLoading(true)
-
+      console.log(import.meta.env)
+      // 
       const resp = await toast.promise(weather.get(`/weather?q=${city}&units=metric&appid=${import.meta.process.env.apiKey}`), {
         error: "invalid city",
         loading: "find your city",
@@ -58,6 +59,19 @@ function App() {
       })
     } catch (error) {
       console.log("invalid city name");
+      getLiveLocation().then((data) => {
+        setLocationInfo(data)
+        setLoading(true)
+        getWeatherData(locationInfo.city).then((data) => {
+          if (!data) {
+            return
+          }
+          console.log(data)
+          setWeatherData(data)
+          changeBackground(data?.condition)
+          setLoading(false)
+        })
+      })
     }
   }
 
