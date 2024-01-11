@@ -16,7 +16,7 @@ const Forcast = () => {
 
     const updateForecast = useCallback(async () => {
         try {
-            const data = (await weather.get(`/forecast?q=${locationInfo.city}&units=metric&appid=8b496e84b9bd1c4dcfa4636f8ceb066f`)).data
+            const data = (await weather.get(`/forecast?q=${locationInfo.city}&units=metric&appid=${import.meta.process.env.apiKey}`)).data
 
             // Track seen days and unique entries
             const seenDays = new Set();
